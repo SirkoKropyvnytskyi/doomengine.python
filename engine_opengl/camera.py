@@ -63,7 +63,7 @@ class Camera(object):
 
     def findWorldPos(self):
         M = glGetDoublev(GL_MODELVIEW_MATRIX)
-        C = (numpy.mat(M[:3,:3]) * numpy.mat(M[3,:3]).T).reshape(3,1).tolist()
+        C = (numpy.asmatrix(M[:3,:3]) * numpy.asmatrix(M[3,:3]).T).reshape(3,1).tolist()
         return [-C[0][0], -C[1][0], -C[2][0]]
 
     def update(self):
@@ -97,7 +97,7 @@ class Camera(object):
             pitchDeltaRadians = deg2rad(pitchDeltaDegrees)
 
             M = glGetDoublev(GL_MODELVIEW_MATRIX)
-            c = (numpy.mat(M[:3,:3]) * numpy.mat(M[3,:3]).T).reshape(3,1)
+            c = (numpy.asmatrix(M[:3,:3]) * numpy.asmatrix(M[3,:3]).T).reshape(3,1)
             # c is camera center in absolute coordinates (world pos)
             # we need to move it back to (0,0,0)
             # before rotating the camera
